@@ -1,0 +1,12 @@
+body {
+    background-image: url("Assets/backgroundSummer.PNG");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-color: #d8c19c;
+    height: 100vh;
+}
+
+img {
+    width: 100%;
+}

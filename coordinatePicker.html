@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            background: #333;
+            display: flex;
+            justify-content: center;
+        }
+
+        img {
+            width: 1200px;
+            cursor: crosshair;
+        }
+
+        #coords {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div id="coords">
+Click somewhere...
+</div>
+
+<img id="board" src="Assets/fullMockup.png">
+
+<script>
+const board = document.getElementById("board");
+const coords = document.getElementById("coords");
+
+board.addEventListener("click", function(e){
+
+    const rect = board.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const xPercent = (x / rect.width * 100).toFixed(2);
+    const yPercent = (y / rect.height * 100).toFixed(2);
+
+    coords.innerHTML =
+        `left: ${xPercent}%<br>
+         top: ${yPercent}%`;
+
+});
+</script>
+
+</body>
+</html>

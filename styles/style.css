@@ -5,6 +5,11 @@ body {
     background: #d8c19c;
 }
 
+@font-face {
+    font-family: "RionaHandwriting";
+    src: url("../Assets/fonts/RionaHandwriting-Regular.ttf") format("truetype");
+}
+
 .board {
     position: relative;
     width: fit-content;
@@ -12,7 +17,7 @@ body {
 
 #background {
     display: block;
-    width: 100vw;      /* example */
+    width: 100%;      /* example */
 }
 
 #editCup {
@@ -53,14 +58,22 @@ body {
 #reminderList{
     position:absolute;
 
-    left:40%;
-    top:11%;
+    left:39.5%;
+    top:20.4%;
 
     width:13%;
     height:18%;
 
-    font-family:"arial";
-    font-size:20px;
+    z-index:100;
+
+    color:rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+    font-size: 150%;
+}
+
+.reminder{
+    margin-bottom:6.5px;
 }
 
 

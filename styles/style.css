@@ -12,12 +12,13 @@ body {
 
 .board {
     position: relative;
-    width: fit-content;
+    width: min(100vw, 160vh);
 }
 
 #background {
     display: block;
-    width: 100%;      /* example */
+    width: 100%;
+    /* example */
 }
 
 #editCup {
@@ -55,25 +56,26 @@ body {
     width: 18%;
 }
 
-#reminderList{
-    position:absolute;
+#reminderList {
+    position: absolute;
 
-    left:39.5%;
-    top:20.4%;
+    left: 39.5%;
+    top: 20.4%;
 
-    width:13%;
-    height:18%;
+    width: 13%;
+    height: 18%;
 
-    z-index:100;
+    z-index: 100;
 
-    color:rgb(59, 39, 60);
+    color: rgb(59, 39, 60);
 
     font-family: "RionaHandwriting", sans-serif;
-    font-size: 150%;
+
+    font-size: calc(1.5 / 100 * min(100vw, 160vh));
 }
 
-.reminder{
-    margin-bottom:6.5px;
+.reminder {
+    margin-bottom: 0.32em;
 }
 
 

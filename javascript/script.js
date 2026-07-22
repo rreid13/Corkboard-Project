@@ -1,11 +1,16 @@
 fetch("JSONfiles/reminders.json")
-    .then(response => {
-        console.log("Response:", response);
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
-        console.log("Data:", data);
+
+        const reminderList = document.getElementById("reminderList");
+
+        let html = "";
+
+        data.reminders.forEach(reminder => {
+            html += `<div class="reminder">• ${reminder}</div>`;
+        });
+
+        reminderList.innerHTML = html;
+
     })
-    .catch(error => {
-        console.error(error);
-    });
+    .catch(error => console.error(error));

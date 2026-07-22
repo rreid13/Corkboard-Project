@@ -18,13 +18,62 @@ body {
 #editCup {
     position: absolute;
     left: 4%;
-    bottom: 3.5%;
+    bottom: 6%;
     width: 18%;
 }
 
-#helper {
+#workHours {
     position: absolute;
-    top:0%;
-    left: 0%;
-    width: 100%;
+    left: 9.25%;
+    top: 8.5%;
+    width: 21.5%;
+}
+
+#stickyNote {
+    position: absolute;
+    left: 26.5%;
+    top: 60%;
+    width: 13.5%;
+}
+
+#calendar {
+    position: absolute;
+    left: 43.25%;
+    top: 53%;
+    width: 21%;
+}
+
+#reminders {
+    position: absolute;
+    left: 37.6%;
+    top: 5.2%;
+    width: 18%;
+}
+
+#reminderList{
+    position:absolute;
+
+    left:40%;
+    top:11%;
+
+    width:13%;
+    height:18%;
+
+    font-family:"arial";
+    font-size:20px;
+}
+
+
+#weatherTideCard {
+    position: absolute;
+    left: 63.5%;
+    top: 5.6%;
+    width: 32%;
+}
+
+#todayPlan {
+    position: absolute;
+    left: 69%;
+    top: 47%;
+    width: 24%;
 }

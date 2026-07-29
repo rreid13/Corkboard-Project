@@ -1,0 +1,32 @@
+{
+    "monday" : null,
+
+    "tuesday": {
+        "start": 7,
+        "end": 13
+    },
+
+    "wednesday" : null,
+
+    "thursday" : {
+        "start": 7,
+        "end": 13
+    },
+
+    "friday" : {
+        "start": 7,
+        "end": 12
+    },
+
+    "saturday" : {
+        "start": 7,
+        "end": 13
+    },
+
+    "sunday" : {
+        "start": 7,
+        "end": 13
+    },
+
+    "hourlyPay":15
+}

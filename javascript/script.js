@@ -57,7 +57,7 @@ fetch("JSONfiles/workHours.json")
             const hours = data[day];
 
             if (data[day] === null) {
-                html += `<div class="workDay">
+                html += `<div class="workDay dayOff">
                     <span>${day.toUpperCase()}</span>
                     <span>DAY OFF</span>
                 </div>`;

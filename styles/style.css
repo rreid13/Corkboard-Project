@@ -358,6 +358,20 @@ body {
     width: 32%;
 }
 
+#tideText {
+    position: absolute;
+
+    left: 67%;
+    top: 27.5%;
+
+    width: 20%;
+
+    color: rgb(59, 39, 60);
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: calc(1.5 / 100 * min(100vw, 160vh));
+}
+
 #todayPlan {
     position: absolute;
     left: 69%;

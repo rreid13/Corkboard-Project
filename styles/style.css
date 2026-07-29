@@ -90,6 +90,217 @@ body {
     width: 21%;
 }
 
+#calendarText {
+    position: absolute;
+    left: 44.5%;
+    top: 61%;
+    width: 18.5%;
+    z-index: 100;
+    color: rgb(59, 39, 60);
+    font-family: "RionaHandwriting", sans-serif;
+    font-size: calc(1.2 / 100 * min(100vw, 160vh));
+    text-align: center;
+}
+
+.calendarHeading {
+    margin-bottom: 5px;
+    font-size: 2.0em;
+    text-align: left;
+}
+
+.calendarGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.calendarDay {
+    position: relative;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background: #d8c19c;
+}
+
+@font-face {
+    font-family: "RionaHandwriting";
+    src: url("../Assets/fonts/RionaHandwriting-Regular.ttf") format("truetype");
+}
+
+.board {
+    position: relative;
+    width: min(100vw, 160vh);
+}
+
+#background {
+    display: block;
+    width: 100%;
+    /* example */
+}
+
+#editCup {
+    position: absolute;
+    left: 4%;
+    bottom: 6%;
+    width: 18%;
+}
+
+#workHours {
+    position: absolute;
+    left: 9.25%;
+    top: 8.5%;
+    width: 21.5%;
+}
+
+#workHoursText {
+    position: absolute;
+
+    left: 12%;
+    top: 17%;
+
+    width: 15.7%;
+    height: 22%;
+
+    z-index: 100;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: calc(1.5 / 100 * min(100vw, 160vh));
+}
+
+.weekHeading {
+    font-size: 0.85em;
+    text-align: center;
+    margin-bottom: 10px
+}
+
+.totals {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1em;
+}
+
+.finaltotal {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3em;
+}
+
+.workDay {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dayOff {
+    color: rgba(59, 39, 60, 0.655);
+}
+
+#stickyNote {
+    position: absolute;
+    left: 26.5%;
+    top: 60%;
+    width: 13.5%;
+}
+
+#calendar {
+    position: absolute;
+    left: 43.25%;
+    top: 53%;
+    width: 21%;
+}
+
+#calendarText {
+    position: absolute;
+    left: 44.5%;
+    top: 61%;
+    width: 18.5%;
+    z-index: 100;
+    color: rgb(59, 39, 60);
+    font-family: "RionaHandwriting", sans-serif;
+    font-size: calc(1.2 / 100 * min(100vw, 160vh));
+    text-align: center;
+}
+
+.calendarHeading {
+    margin-bottom: 5px;
+    font-size: 2.0em;
+    text-align: left;
+}
+
+.calendarGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.calendarDay {
+    position: relative;
+}
+
+.calendarDay {
+    position: relative;
+}
+
+.today {
+    position: relative;
+    z-index: 1;
+}
+
+.today::before {
+    content: "";
+    position: absolute;
+    top: 47%;
+    left: 51.5%;
+    transform: translate(-50%, -60%);
+    width: 1.9em;
+    height: 1.7em;
+    background-image: url(../Assets/Animations/calendarCircleAnimation.GIF);
+    background-size: 1.9em;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+#reminderList {
+    position: absolute;
+
+    left: 39.5%;
+    top: 20.4%;
+
+    width: 13%;
+    height: 18%;
+
+    z-index: 100;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: calc(1.5 / 100 * min(100vw, 160vh));
+}
+
+.reminder {
+    margin-bottom: 0.32em;
+}
+
+
+#weatherTideCard {
+    position: absolute;
+    left: 63.5%;
+    top: 5.6%;
+    width: 32%;
+}
+
+#todayPlan {
+    position: absolute;
+    left: 69%;
+    top: 47%;
+    width: 24%;
+}
 #reminders {
     position: absolute;
     left: 37.6%;

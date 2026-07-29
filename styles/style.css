@@ -35,6 +35,47 @@ body {
     width: 21.5%;
 }
 
+#workHoursText {
+    position: absolute;
+
+    left: 12%;
+    top: 17%;
+
+    width: 15.7%;
+    height: 22%;
+
+    z-index: 100;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: calc(1.5 / 100 * min(100vw, 160vh));
+}
+
+.weekHeading {
+    font-size: 0.85em;
+    text-align: center;
+    margin-bottom: 10px
+}
+
+.totals {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1em;
+}
+
+.finaltotal {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3em;
+}
+
+.workDay {
+    display: flex;
+    justify-content: space-between;
+}
+
 #stickyNote {
     position: absolute;
     left: 26.5%;

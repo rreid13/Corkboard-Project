@@ -1,13 +1,10 @@
-const API_KEY = "d6ba3758-6d63-478f-98e8-c4e749a00186";
 
 const LAT = 55.19345254991711;
 const LON = -7.836906631516278
 
 async function getTides() {
 
-    const url = `https://www.worldtides.info/api/v3?heights=0&extremes=1&lat=${LAT}&lon=${LON}&key=${API_KEY}`;
-
-    const response = await fetch(url);
+    const response = await fetch("http://localhost:3000/api/tides");
     const data = await response.json();
 
     console.log(data);

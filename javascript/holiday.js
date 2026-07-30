@@ -1,22 +1,27 @@
-const API_KEY = "MQEVZxMXGwSFOnN1YfGO4r3YAGdCts3R";
+console.log("holiday.js loaded");
 
 fetch("https://api.apilayer.com/checkiday/events", {
     headers: {
-        "apikey": API_KEY
+        apikey: CHECKIDAY_API_KEY
     }
 })
+.then(response => response.json())
+.then(data => {
 
-    .then(response => response.json())
-    .then(data => {
+    console.log(data);
 
+    if (!data.events) {
+        console.error("No events returned.");
+        return;
+    }
 
-        const holiday = document.getElementById("stickyNoteText");
+    const holiday = document.getElementById("stickyNoteText");
 
-        const randomIndex = Math.floor(Math.random() * data.events.length);
+    const randomIndex =
+        Math.floor(Math.random() * data.events.length);
 
-        holiday.innerText = "Today is " + data.events[randomIndex].name + "!";
+    holiday.innerText =
+        "Today is " + data.events[randomIndex].name + "!";
 
-    })
-    .catch(error => {
-        console.error(error);
-    });
+})
+.catch(console.error);

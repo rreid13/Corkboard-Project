@@ -180,6 +180,13 @@ body {
 
 .reminder {
     margin-bottom: 0.32em;
+    cursor: pointer;
+    transition: 0.2s ease
+}
+
+.reminder:hover{
+    color: white;
+   -webkit-text-stroke: 1px rgb(59, 39, 60);
 }
 
 

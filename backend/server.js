@@ -1,9 +1,47 @@
+const fs = require("fs");
+const path = require("path");
+
 require("dotenv").config({ path: "../.env" });
 
 const express = require("express");
 const app = express();
 
 const PORT = 3000;
+
+
+app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "..")));
+
+app.get("/api/reminders", (req, res) => {
+    const filePath = path.join(__dirname, "../JSONfiles/reminders.json");
+
+    const data = fs.readFileSync(filePath);
+    res.json(JSON.parse(data));
+});
+
+app.delete("/api/reminders", (req, res) => {
+
+    const filePath = path.join(__dirname, "../JSONfiles/reminders.json");
+
+    const data = JSON.parse(fs.readFileSync(filePath));
+
+    const reminderToDelete = req.body.reminder;
+
+    data.reminders = data.reminders.filter(
+        reminder => reminder !== reminderToDelete
+    );
+
+    fs.writeFileSync(
+        filePath,
+        JSON.stringify(data, null, 2)
+    );
+
+    res.json({
+        message: "Reminder deleted"
+    });
+
+});
 
 app.get("/api/tides", async (req, res) => {
 

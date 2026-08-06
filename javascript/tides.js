@@ -1,11 +1,33 @@
+const TIDE_TEST_DATA = true;
+
 
 const LAT = 55.19345254991711;
 const LON = -7.836906631516278
 
 async function getTides() {
 
-    const response = await fetch("http://localhost:3000/api/tides");
-    const data = await response.json();
+    let data;
+
+    if (TIDE_TEST_DATA) {
+        data = {
+            "extremes": [
+                {
+                    type: "High",
+                    dt: Math.floor(Date.now() / 1000) + 60 * 60
+                },
+                {
+                    type: "Low",
+                    dt: Math.floor(Date.now() / 1000) + 4 * 60 * 60
+                }
+            ]
+        };
+
+    } else {
+
+        const response = await fetch("http://localhost:3000/api/tides");
+        data = await response.json();
+
+    }
 
     console.log(data);
 

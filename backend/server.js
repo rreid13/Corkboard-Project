@@ -43,6 +43,30 @@ app.delete("/api/reminders", (req, res) => {
 
 });
 
+app.post("/api/reminders", (req, res) => {
+
+console.log("POST /api/reminders received");
+    console.log("Reminder:", req.body.reminder);
+
+    const filePath = path.join(__dirname, "../JSONfiles/reminders.json");
+
+    const data = JSON.parse(fs.readFileSync(filePath));
+
+    const newReminder = req.body.reminder;
+
+    data.reminders.push(newReminder);
+
+    fs.writeFileSync(
+        filePath,
+        JSON.stringify(data, null, 2)
+    );
+
+    res.json({
+        message: "Reminder added"
+    });
+
+});
+
 app.get("/api/tides", async (req, res) => {
 
     const url = `https://www.worldtides.info/api/v3?heights=0&extremes=1&lat=YOUR_LAT&lon=YOUR_LON&key=${process.env.WORLDTIDES_API_KEY}`;

@@ -21,11 +21,67 @@ body {
     /* example */
 }
 
-#editCup {
+#editCupFront {
     position: absolute;
-    left: 4%;
-    bottom: 6%;
-    width: 18%;
+    left: 7.5%;
+    bottom: 10.6%;
+    width: 12%;
+    z-index: 3;
+}
+
+#editCupBack {
+    position: absolute;
+    left: 7.5%;
+    bottom: 10.5%;
+    width: 12%;
+    z-index: 1;
+}
+
+#remindersPen {
+    position: absolute;
+    left: 13%;
+    bottom: 21.2%;
+    width: 2.2%;
+    cursor: pointer;
+    transition: 0.3s ease;
+    z-index: 2;
+}
+
+#remindersPen:hover {
+    bottom: 25%;
+    left: 13.2%;
+    filter: drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white);
+
+}
+
+#remindersPen.edit-mode {
+    bottom: 25%;
+    left: 13.2%;
+}
+
+#addReminder {
+    color: rgba(59, 39, 60, 0.45);
+    cursor: pointer;
+    font-family: "RionaHandwriting", sans-serif;
+    font-size: inherit;
+}
+
+#addReminder:hover {
+    color: rgba(59, 39, 60, 0.8);
+}
+
+
+#newReminderInput {
+    font-family: "RionaHandwriting", sans-serif;
+    font-size: inherit;
+
+    color: rgb(59, 39, 60);
+
+    background: transparent;
+    border: none;
+    outline: none;
+
+    width: 100%;
 }
 
 #workHours {
@@ -186,7 +242,32 @@ body {
 
 .reminder:hover{
     color: white;
-   -webkit-text-stroke: 1px rgb(59, 39, 60);
+    text-shadow: -1px -1px 0 #3b273c, 1px -1px 0 #3b273c, -1px 1px 0 #3b273c, 1px 1px 0 #3b273c;
+}
+
+#editingRemindersText {
+    position: absolute;
+
+    left: 50%;
+    bottom: 5%;
+    transform: translateX(-50%);
+
+    font-family: "RionaHandwriting", sans-serif;
+    font-size: calc(3 / 100 * min(100vw, 160vh));
+
+    color: rgb(253, 253, 253);
+    background-color: rgba(114, 207, 222, 0.808);
+    border: 5px solid rgba(114, 207, 222, 0.808);
+    border-radius: 10px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.3s ease;
+}
+
+#editingRemindersText.visible {
+    opacity: 1;
 }
 
 

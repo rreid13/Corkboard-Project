@@ -25,21 +25,45 @@
 
         <img src="../Assets/components/reminders.PNG" id="reminders">
         <div id="reminderList"></div>
-         <div id="editingRemindersText">Editing reminders</div>
-
-
+        <div id="editingRemindersText">Editing reminders</div>
 
         <img src="../Assets/components/todayPlan.PNG" id="todayPlan">
-        <img src="../Assets/components/weatherTideCard.PNG" id="weatherTideCard">
-        <div id = "tideText"></div>
-        <div id = "weatherText"></div>
 
+        <img src="../Assets/components/weatherTideCard/back.PNG" id="weatherCardBack">
+        <img src="../Assets/components/weatherTideCard/foldedCardFront.PNG" id="foldedCardFront">
+        <img src="../Assets/components/weatherTideCard/sunnySeaAnim.PNG" id="sunnySea">
+        <img src="../Assets/components/weatherTideCard/weatherIcons/largeIcons/sunnyAnim.PNG" id="foldedWeatherIcon">
+
+        <div id="tideText"></div>
+        <div id="weatherText"></div>
+
+        <div id="weatherExpanded">
+            <img src="../Assets/components/weatherTideCard/unfoldedCard.PNG" id="unfoldedCard">
+            <div id="weatherTop">
+                <div id="currentWeather">
+                    <img id="largeWeatherIcon">
+                    <div id="currentTemperature"></div>
+                </div>
+
+                <div id="weatherSummary">
+                    <div id="currentTime"></div>
+                    <div id="todayHigh"></div>
+                    <div id="todayLow"></div>
+                    <div id="currentCondition"></div>
+                </div>
+            </div>
+
+            <div id="hourlyWeather"></div>
+
+            <div id="dailyWeather"></div>
+
+        </div>
     </div>
 
     <script src="javascript/reminders.js"></script>
     <script src="javascript/workHours.js"></script>
     <script src="javascript/calendar.js"></script>
-    
+
     <script src="javascript/tides.js"></script>
     <script src="javascript/weather.js"></script>
     <!-- <script src="javascript/holiday.js"></script> -->

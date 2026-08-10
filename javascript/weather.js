@@ -7,9 +7,15 @@ async function getWeather() {
 
     if (WEATHER_TEST_DATA) {
         weather = {
-            condition: "Sunny",
-            high: 20,
-            low: 12
+            current: {
+                condition: "Sunny",
+                temperature: 18
+            },
+
+            today: {
+                high: 20,
+                low: 12
+            }
         };
     } else {
         const response = await fetch("/api/weather");
@@ -17,28 +23,46 @@ async function getWeather() {
     }
 
     console.log(weather);
-    displayWeather(weather);
+   displayWeather(weather);
+    displayCurrentWeather(weather);
 }
 
 function displayWeather(weather) {
     const html = `
-    ${weather.low}°C → ${weather.high}°C
+    ${weather.today.low}°C → ${weather.today.high}°C
     `
     document.getElementById("weatherText").innerHTML = html;
 }
 
 getWeather();
 
-/*
-function changeWeatherAnimation(condition) {
+const foldedWeatherIcon = document.getElementById("foldedWeatherIcon");
+const weatherExpanded = document.getElementById("weatherExpanded");
 
-    if (condition === "Sunny") {
-        showSunAnimation();
-    }
+foldedWeatherIcon.addEventListener("click", function () {
+    weatherExpanded.classList.toggle("open");
+    document.getElementById("foldedCardFront").classList.toggle("hidden");
+    document.getElementById("sunnySea").classList.toggle("hidden");
+    document.getElementById("tideText").classList.toggle("hidden");
+    document.getElementById("weatherText").classList.toggle("hidden");
+});
 
-    if (condition === "Rain") {
-        showRainAnimation();
-    }
+function displayCurrentWeather(weather) {
+    const largeIcons = {
+        "Sunny": "sunnyAnim.PNG"
+    };
 
+    document.getElementById("largeWeatherIcon").src =
+        `../Assets/components/weatherTideCard/weatherIcons/largeIcons/${largeIcons[weather.current.condition]}`;
+    document.getElementById("currentTemperature").innerHTML = `${weather.current.temperature}°C`;
+    document.getElementById("currentTime").textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    document.getElementById("todayHigh").textContent =
+        `↑ ${weather.today.high}°C`;
+
+    document.getElementById("todayLow").textContent =
+        `↓ ${weather.today.low}°C`;
+
+    document.getElementById("currentCondition").textContent =
+        `Today is ${weather.current.condition}!`;
 }
-    */

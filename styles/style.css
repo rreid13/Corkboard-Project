@@ -151,7 +151,7 @@ body {
     align-items: center;
 
     text-align: center;
-    
+
     font-size: calc(1.8 / 100 * min(100vw, 160vh));
     color: rgb(59, 39, 60);
     font-family: "RionaHandwriting", sans-serif;
@@ -240,7 +240,7 @@ body {
     transition: 0.2s ease
 }
 
-.reminder:hover{
+.reminder:hover {
     color: white;
     text-shadow: -1px -1px 0 #3b273c, 1px -1px 0 #3b273c, -1px 1px 0 #3b273c, 1px 1px 0 #3b273c;
 }
@@ -326,6 +326,7 @@ body {
     font-family: "RionaHandwriting", sans-serif;
 
     font-size: calc(1.5 / 100 * min(100vw, 160vh));
+    z-index: 6;
 }
 
 #weatherText {
@@ -340,6 +341,7 @@ body {
     font-family: "RionaHandwriting", sans-serif;
 
     font-size: calc(2.75 / 100 * min(100vw, 160vh));
+    z-index: 6;
 }
 
 #todayPlan {
@@ -349,11 +351,25 @@ body {
     width: 24%;
 }
 
-#foldedCard {
+#weatherCardBack,
+#sunnySea,
+#foldedCardFront {
     position: absolute;
     left: 63.5%;
     top: 5.6%;
     width: 32%;
+}
+
+#weatherCardBack {
+    z-index: 1;
+}
+
+#sunnySea {
+    z-index: 2;
+}
+
+#foldedCardFront {
+    z-index: 3;
 }
 
 #foldedWeatherIcon {
@@ -361,10 +377,119 @@ body {
     left: 67%;
     top: 12.5%;
     width: 9%;
-    transition:all 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    z-index: 5;
 }
 
 #foldedWeatherIcon:hover {
-     filter: drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white);
+    filter: drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white);
+}
 
+#weatherExpanded {
+    display: none;
+
+    position: absolute;
+    left: 63.5%;
+    top: 5.6%;
+
+    width: 32%;
+
+    z-index: 10;
+}
+
+
+#weatherExpanded.open {
+    display: block;
+}
+
+
+#unfoldedCard {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+
+    z-index: 0;
+}
+
+
+#weatherTop,
+#hourlyWeather,
+#dailyWeather {
+    position: relative;
+    z-index: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Weather Top Section */
+#weatherTop {
+    position: absolute;
+    left: 8%;
+    top: 10%;
+    width: 84%;
+    height: 25%;
+    transform: translateY(4vw);
+}
+
+#currentWeather {
+    position: absolute;
+    left: 5%;
+    top: 0;
+
+    width: 30%;
+
+    text-align: center;
+}
+
+#largeWeatherIcon {
+    width: 135%;
+    transform: translateX(5%);
+    transform: translateY(10%);
+    display: block;
+    margin: 0 auto;
+}
+
+
+#currentTemperature {
+    font-family: "RionaHandwriting", sans-serif;
+    margin-top: 25%;
+    font-size: 2vw;
+    transform: translate(15%, 10%);
+    color: rgb(59, 39, 60);
+}
+
+#weatherSummary {
+    position: absolute;
+    right: 1%;
+    top: 7%;
+
+    width: 55%;
+
+    font-family: "RionaHandwriting", sans-serif;
+    color: rgb(59, 39, 60);
+}
+
+
+#currentTime {
+    font-size: 1.7vw;
+    margin-bottom: 5%;
+    transform: translate(4vw, 0);
+}
+
+#todayHigh,
+#todayLow {
+    font-size: 2.3vw;
+    transform: translate(2vw, 1vw);
+}
+
+
+#currentCondition {
+    font-size: 1.7vw;
+    margin-top: 25%;
 }

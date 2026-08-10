@@ -1,0 +1,37 @@
+#editCupFront {
+    position: absolute;
+    left: 7.5%;
+    bottom: 10.6%;
+    width: 12%;
+    z-index: 3;
+}
+
+#editCupBack {
+    position: absolute;
+    left: 7.5%;
+    bottom: 10.5%;
+    width: 12%;
+    z-index: 1;
+}
+
+#remindersPen {
+    position: absolute;
+    left: 13%;
+    bottom: 21.2%;
+    width: 2.2%;
+    cursor: pointer;
+    transition: 0.3s ease;
+    z-index: 2;
+}
+
+#remindersPen:hover {
+    bottom: 25%;
+    left: 13.2%;
+    filter: drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white);
+
+}
+
+#remindersPen.edit-mode {
+    bottom: 25%;
+    left: 13.2%;
+}

@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background: #d8c19c;
+}
+
+@font-face {
+    font-family: "RionaHandwriting";
+    src: url("../Assets/fonts/RionaHandwriting-Regular.ttf") format("truetype");
+}
+
+.board {
+    position: relative;
+    width: min(100vw, 160vh);
+}
+
+#background {
+    display: block;
+    width: 100%;
+    /* example */
+}

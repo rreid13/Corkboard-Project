@@ -4,15 +4,23 @@ to do (immediate)
 - do the readme properly
 - link weather api
 - move api keys
+- tide card
 
 to do (later)
-- finish sketching tide/weather card
-- add hover animations to sun and waves
-- make sun change depending on todays average weater (sun, cloud, thunder etc)
+- finish sketching tide card
+- draw all large weather icons
+- matching skies for all weather icons
+- add hover animations to waves (and maybe matching colours for weather)
+- make sun change depending on current condition
 - add animation to todays plan
 - create more sticky notes
 - fugure out how to randomise national holidays/quotes/fun facts
-- maybe rearange everything to be bigger
+
+error handling
+- only 7 reminders at a time
+- cannot delete reminder in edit mode
+- cannot enter multiple edit modes at once
+- limit interactivity in edit mode
 
 features to add
 - editing!!!

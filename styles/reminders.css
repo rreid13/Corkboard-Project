@@ -1,0 +1,108 @@
+#addReminder {
+    color: rgba(59, 39, 60, 0.45);
+    cursor: pointer;
+    font-family: "RionaHandwriting", sans-serif;
+    font-size: inherit;
+}
+
+#addReminder:hover {
+    color: rgba(59, 39, 60, 0.8);
+}
+
+
+#newReminderInput {
+    font-family: "RionaHandwriting", sans-serif;
+    font-size: inherit;
+
+    color: rgb(59, 39, 60);
+
+    background: transparent;
+    border: none;
+    outline: none;
+
+    width: 100%;
+}
+
+#reminderList {
+    position: absolute;
+
+    left: 39.5%;
+    top: 20.4%;
+
+    width: 13%;
+    height: 18%;
+
+    z-index: 100;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: calc(1.5 / 100 * min(100vw, 160vh));
+}
+
+.reminder {
+    margin-bottom: 0.32em;
+    cursor: pointer;
+    transition: 0.2s ease
+}
+
+.reminder:hover {
+    color: white;
+    text-shadow: -1px -1px 0 #3b273c, 1px -1px 0 #3b273c, -1px 1px 0 #3b273c, 1px 1px 0 #3b273c;
+}
+
+#editingRemindersText {
+    position: absolute;
+
+    left: 50%;
+    bottom: 5%;
+    transform: translateX(-50%);
+
+    font-family: "RionaHandwriting", sans-serif;
+    font-size: calc(3 / 100 * min(100vw, 160vh));
+
+    color: rgb(253, 253, 253);
+    background-color: rgba(114, 207, 222, 0.808);
+    border: 5px solid rgba(114, 207, 222, 0.808);
+    border-radius: 10px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.3s ease;
+}
+
+#editingRemindersText.visible {
+    opacity: 1;
+}
+
+#reminders {
+    position: absolute;
+    left: 37.6%;
+    top: 5.2%;
+    width: 18%;
+}
+
+#reminderList {
+    position: absolute;
+
+    left: 39.5%;
+    top: 20.4%;
+
+    width: 13%;
+    height: 18%;
+
+    z-index: 100;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: calc(1.5 / 100 * min(100vw, 160vh));
+}
+
+.reminder {
+    margin-bottom: 0.32em;
+}
+

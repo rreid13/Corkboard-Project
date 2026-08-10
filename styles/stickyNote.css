@@ -1,0 +1,24 @@
+#stickyNote {
+    position: absolute;
+    left: 26.5%;
+    top: 60%;
+    width: 13.5%;
+}
+
+#stickyNoteText {
+    position: absolute;
+    left: 27%;
+    top: 65%;
+    width: 11.5%;
+    height: 15%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    font-size: calc(1.8 / 100 * min(100vw, 160vh));
+    color: rgb(59, 39, 60);
+    font-family: "RionaHandwriting", sans-serif;
+}

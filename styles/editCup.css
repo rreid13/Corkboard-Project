@@ -35,3 +35,37 @@
     bottom: 25%;
     left: 13.2%;
 }
+
+#workPen {
+    position: absolute;
+    left: 15%;
+    bottom: 26%;
+    width: 4%;
+    cursor: pointer;
+    transition: 0.3s ease;
+    z-index: 2;
+}
+
+#workPen:hover {
+    bottom: 29%;
+    left: 15.4%;
+    filter: drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white);
+
+}
+
+#calendarPen {
+    position: absolute;
+    left: 8%;
+    bottom: 24%;
+    width: 5%;
+    cursor: pointer;
+    transition: 0.3s ease;
+    z-index: 2;
+}
+
+#calendarPen:hover {
+    bottom: 28%;
+    left: 7%;
+    filter: drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white);
+
+}

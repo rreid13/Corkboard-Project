@@ -78,6 +78,7 @@ function showAddReminder() {
     reminderList.appendChild(addReminder);
 
     addReminder.addEventListener("click", function () {
+        hideAddReminder();
         createReminderInput();
     });
 }

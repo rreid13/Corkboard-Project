@@ -1,4 +1,6 @@
-# Corkboard-Project
+# Corkboard
+
+> A personalised desktop-style productivity dashboard designed around the information I need throughout my day
 
 to do (immediate)
 - do the readme properly

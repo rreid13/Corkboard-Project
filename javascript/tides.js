@@ -1,14 +1,12 @@
-const TIDE_TEST_DATA = true;
+const TIDE_TEST_DATA = false;
 
-
-const LAT = 55.19345254991711;
-const LON = -7.836906631516278
 
 async function getTides() {
 
     let data;
 
     if (TIDE_TEST_DATA) {
+
         data = {
             "extremes": [
                 {
@@ -24,10 +22,28 @@ async function getTides() {
 
     } else {
 
-        const response = await fetch("http://localhost:3000/api/tides");
-        data = await response.json();
+        const response = await fetch("/api/tides");
+        const tideData = await response.json();
 
+        const extremes = [];
+
+        tideData.table.rows.forEach(row => {
+
+            const time = row[1];
+            const type = row[2];
+
+            extremes.push({
+                type: type === "HIGH" ? "High" : "Low",
+                dt: Math.floor(new Date(time).getTime() / 1000)
+            });
+
+        });
+
+        data = {
+            extremes: extremes
+        };
     }
+
 
     console.log(data);
 
@@ -37,11 +53,16 @@ async function getTides() {
     const now = new Date();
 
     data.extremes.forEach(tide => {
+
         const tideTime = new Date(tide.dt * 1000);
+
         if (tideTime > now) {
+
             if (tide.type === "High" && !nextHigh) {
                 nextHigh = tide;
-            } else if (tide.type === "Low" && !nextLow) {
+            }
+
+            else if (tide.type === "Low" && !nextLow) {
                 nextLow = tide;
             }
         }
@@ -49,6 +70,7 @@ async function getTides() {
 
     displayTides(nextHigh, nextLow);
 }
+
 
 function displayTides(high, low) {
 
@@ -79,5 +101,6 @@ function displayTides(high, low) {
 
     document.getElementById("tideText").innerHTML = html;
 }
+
 
 getTides();

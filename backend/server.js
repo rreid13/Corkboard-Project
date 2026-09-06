@@ -1,12 +1,63 @@
 const fs = require("fs");
 const path = require("path");
 
-require("dotenv").config({ path: "../.env" });
-
 const express = require("express");
 const app = express();
 
 const PORT = 3000;
+
+function getWeatherCondition(code) {
+
+    if (code === 0) {
+        return "Sunny";
+    }
+
+    if (code === 1) {
+        return "Sunny";
+    }
+
+    if (code === 2) {
+        return "Partly Cloudy";
+    }
+
+    if (code === 3) {
+        return "Cloudy";
+    }
+
+    if (code === 45 || code === 48) {
+        return "Fog";
+    }
+
+    if (code >= 51 && code <= 57) {
+        return "Light Rain";
+    }
+
+    if (code >= 61 && code <= 67) {
+        return "Rain";
+    }
+
+    if (code >= 71 && code <= 77) {
+        return "Snow";
+    }
+
+    if (code >= 80 && code <= 82) {
+        return "Rain";
+    }
+
+    if (code === 85 || code === 86) {
+        return "Snow";
+    }
+
+    if (code === 95) {
+        return "Lightning";
+    }
+
+    if (code === 96 || code === 99) {
+        return "Hail";
+    }
+
+    return "Cloudy";
+}
 
 
 app.use(express.json());
@@ -45,7 +96,7 @@ app.delete("/api/reminders", (req, res) => {
 
 app.post("/api/reminders", (req, res) => {
 
-console.log("POST /api/reminders received");
+    console.log("POST /api/reminders received");
     console.log("Reminder:", req.body.reminder);
 
     const filePath = path.join(__dirname, "../JSONfiles/reminders.json");
@@ -76,6 +127,110 @@ app.get("/api/tides", async (req, res) => {
     const data = await response.json();
 
     res.json(data);
+});
+
+app.get("/api/weather", async (req, res) => {
+
+    const LAT = 55.19345254991711;
+    const LON = -7.836906631516278;
+
+    const url =
+        `https://api.open-meteo.com/v1/forecast` +
+        `?latitude=${LAT}` +
+        `&longitude=${LON}` +
+        `&current=temperature_2m,weather_code` +
+        `&hourly=temperature_2m,weather_code` +
+        `&daily=weather_code,temperature_2m_max,temperature_2m_min` +
+        `&timezone=Europe%2FLondon` +
+        `&forecast_days=7`;
+
+    try {
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`Open-Meteo returned ${response.status}`);
+        }
+
+        const data = await response.json();
+
+
+        // CURRENT WEATHER
+
+        const current = {
+            condition: getWeatherCondition(data.current.weather_code),
+            temperature: Math.round(data.current.temperature_2m)
+        };
+
+
+        // TODAY
+
+        const today = {
+            high: Math.round(data.daily.temperature_2m_max[0]),
+            low: Math.round(data.daily.temperature_2m_min[0])
+        };
+
+
+        // HOURLY WEATHER
+
+        const hourly = [];
+
+        const currentTime = new Date();
+
+        const currentHour = currentTime.getHours();
+
+        for (let i = 0; i < 12; i++) {
+
+            const index = currentHour + i;
+
+            hourly.push({
+                condition: getWeatherCondition(
+                    data.hourly.weather_code[index]
+                ),
+
+                temperature: Math.round(data.hourly.temperature_2m[index])
+            });
+
+        }
+
+
+        // DAILY WEATHER
+
+        const daily = [];
+
+        for (let i = 0; i < 7; i++) {
+
+            daily.push({
+                condition: getWeatherCondition(
+                    data.daily.weather_code[i]
+                ),
+
+                low: Math.round(data.daily.temperature_2m_min[i]),
+                high: Math.round(data.daily.temperature_2m_max[i])
+            });
+
+        }
+
+
+        // SEND DATA TO FRONTEND
+
+        res.json({
+            current,
+            today,
+            hourly,
+            daily
+        });
+
+    } catch (error) {
+
+        console.error("Weather API error:", error);
+
+        res.status(500).json({
+            error: "Failed to fetch weather data"
+        });
+
+    }
+
 });
 
 app.listen(PORT, () => {

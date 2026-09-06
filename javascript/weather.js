@@ -1,6 +1,6 @@
 console.log("weather.js loaded");
 
-const WEATHER_TEST_DATA = true;
+const WEATHER_TEST_DATA = false;
 
 async function getWeather() {
     let weather;
@@ -84,11 +84,30 @@ foldTab.addEventListener("click", function () {
 
 function displayCurrentWeather(weather) {
     const largeIcons = {
-        "Sunny": "sunnyAnim.PNG"
-    };
+    "Sunny": "sunnyAnim.PNG",
+    "Clear": "clearAnim.PNG",
+    "Cloudy": "cloudyAnim.PNG",
+    "Partly Cloudy": "partlyCloudyAnim.PNG",
+    "Rain": "rainAnim.PNG",
+    "Light Rain": "lightRainAnim.PNG",
+    "Heavy Rain": "heavyRainAnim.PNG",
+    "Snow": "snowAnim.PNG",
+    "Heavy Snow": "heavySnowAnim.PNG",
+    "Blowing Snow": "blowingSnowAnim.PNG",
+    "Fog": "fogAnim.PNG",
+    "Hail": "hailAnim.PNG",
+    "Lightning": "lightningAnim.PNG",
+    "Wind": "windAnim.PNG"
+};
 
-    document.getElementById("largeWeatherIcon").src =
-        `../Assets/components/weatherTideCard/weatherIcons/largeIcons/${largeIcons[weather.current.condition]}`;
+const iconFile = largeIcons[weather.current.condition];
+
+document.getElementById("largeWeatherIcon").src =
+    `../Assets/components/weatherTideCard/weatherIcons/largeIcons/${iconFile}`;
+
+document.getElementById("foldedWeatherIcon").src =
+    `../Assets/components/weatherTideCard/weatherIcons/largeIcons/${iconFile}`;
+        
     document.getElementById("currentTemperature").innerHTML = `${weather.current.temperature}°C`;
     document.getElementById("currentTime").textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
 

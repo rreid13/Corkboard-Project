@@ -120,13 +120,41 @@ app.post("/api/reminders", (req, res) => {
 
 app.get("/api/tides", async (req, res) => {
 
-    const url = `https://www.worldtides.info/api/v3?heights=0&extremes=1&lat=YOUR_LAT&lon=YOUR_LON&key=${process.env.WORLDTIDES_API_KEY}`;
+    const url =
+        `https://erddap.marine.ie/erddap/tabledap/` +
+        `IMI_TidePrediction_HighLow.json` +
+        `?stationID,time,tide_time_category,Water_Level_ODMalin` +
+        `&stationID="Buncranna"` +
+        `&time>=now` +
+        `&time<=now%2B2%20days`;
 
-    const response = await fetch(url);
+    try {
 
-    const data = await response.json();
+        const response = await fetch(url);
 
-    res.json(data);
+        if (!response.ok) {
+            throw new Error(
+                `Marine Institute returned ${response.status}`
+            );
+        }
+
+        const data = await response.json();
+
+        console.log("Marine Institute tide data:", data);
+
+        res.json(data);
+
+    } catch (error) {
+
+        console.error("Tide API error:", error);
+
+        res.status(500).json({
+            error: "Failed to fetch tide data",
+            details: error.message
+        });
+
+    }
+
 });
 
 app.get("/api/weather", async (req, res) => {

@@ -43,10 +43,19 @@ async function getWeather() {
 
             ]
         };
-    } else {
-        const response = await fetch("/api/weather");
-        weather = await response.json();
-    }
+   } else {
+
+    const location = getSelectedLocation();
+
+    console.log("Selected location:", location);
+    console.log("Weather URL:", `/api/weather?lat=${location.lat}&lon=${location.lon}`);
+
+    const response = await fetch(
+        `/api/weather?lat=${location.lat}&lon=${location.lon}`
+    );
+
+    weather = await response.json();
+}
 
     console.log(weather);
     displayWeather(weather);
@@ -84,30 +93,30 @@ foldTab.addEventListener("click", function () {
 
 function displayCurrentWeather(weather) {
     const largeIcons = {
-    "Sunny": "sunnyAnim.PNG",
-    "Clear": "clearAnim.PNG",
-    "Cloudy": "cloudyAnim.PNG",
-    "Partly Cloudy": "partlyCloudyAnim.PNG",
-    "Rain": "rainAnim.PNG",
-    "Light Rain": "lightRainAnim.PNG",
-    "Heavy Rain": "heavyRainAnim.PNG",
-    "Snow": "snowAnim.PNG",
-    "Heavy Snow": "heavySnowAnim.PNG",
-    "Blowing Snow": "blowingSnowAnim.PNG",
-    "Fog": "fogAnim.PNG",
-    "Hail": "hailAnim.PNG",
-    "Lightning": "lightningAnim.PNG",
-    "Wind": "windAnim.PNG"
-};
+        "Sunny": "sunnyAnim.PNG",
+        "Clear": "clearAnim.PNG",
+        "Cloudy": "cloudyAnim.PNG",
+        "Partly Cloudy": "partlyCloudyAnim.PNG",
+        "Rain": "rainAnim.PNG",
+        "Light Rain": "lightRainAnim.PNG",
+        "Heavy Rain": "heavyRainAnim.PNG",
+        "Snow": "snowAnim.PNG",
+        "Heavy Snow": "heavySnowAnim.PNG",
+        "Blowing Snow": "blowingSnowAnim.PNG",
+        "Fog": "fogAnim.PNG",
+        "Hail": "hailAnim.PNG",
+        "Lightning": "lightningAnim.PNG",
+        "Wind": "windAnim.PNG"
+    };
 
-const iconFile = largeIcons[weather.current.condition];
+    const iconFile = largeIcons[weather.current.condition];
 
-document.getElementById("largeWeatherIcon").src =
-    `../Assets/components/weatherTideCard/weatherIcons/largeIcons/${iconFile}`;
+    document.getElementById("largeWeatherIcon").src =
+        `../Assets/components/weatherTideCard/weatherIcons/largeIcons/${iconFile}`;
 
-document.getElementById("foldedWeatherIcon").src =
-    `../Assets/components/weatherTideCard/weatherIcons/largeIcons/${iconFile}`;
-        
+    document.getElementById("foldedWeatherIcon").src =
+        `../Assets/components/weatherTideCard/weatherIcons/largeIcons/${iconFile}`;
+
     document.getElementById("currentTemperature").innerHTML = `${weather.current.temperature}°C`;
     document.getElementById("currentTime").textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
 

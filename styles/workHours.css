@@ -21,6 +21,9 @@
     font-family: "RionaHandwriting", sans-serif;
 
     font-size: calc(1.5 / 100 * min(100vw, 160vh));
+
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
 .weekHeading {
@@ -48,4 +51,185 @@
 
 .dayOff {
     color: rgba(59, 39, 60, 0.655);
+}
+
+#workHoursEdit {
+
+    position: absolute;
+    background-color: rgb(254, 236, 216);
+
+    left: 12%;
+    top: 17%;
+
+    width: 15.7%;
+    height: 30%;
+
+    z-index: 5;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: calc(1.3 / 100 * min(100vw, 160vh));
+
+     opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.3s ease;
+}
+
+#workHoursEdit.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+/* Individual day */
+
+.editWorkDay {
+    display: grid;
+
+    grid-template-columns: 31% 69%;
+
+    margin-bottom: 3%;
+}
+
+/* Day name */
+
+.editWorkDayTitle {
+    font-size: 0.9em;
+    text-align: left;
+    margin-bottom: 2%;
+}
+
+
+/* Start/end dropdowns */
+
+.editWorkRow {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 3%;
+}
+
+
+/* Dropdowns */
+
+.workTimeSelect {
+    width: 42%;
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: 0.75em;
+
+    color: rgb(59, 39, 60);
+
+    background: rgb(232, 220, 191);
+
+    border: 1.5px solid rgb(59, 39, 60);
+
+    border-radius: 3px;
+
+    width: 33.5%;
+
+    padding: 1% 2%;
+
+    cursor: pointer;
+}
+
+
+/* Arrow between times */
+
+.editWorkRow span {
+    font-size: 0.8em;
+}
+
+
+/* Day off */
+
+.dayOffLabel {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 5%;
+
+    margin-top: 2%;
+
+    font-size: 0.65em;
+
+    white-space: nowrap;
+
+    grid-column: 2;
+}
+
+
+/* Checkbox */
+
+.dayOffCheckbox {
+    appearance: none;
+
+    width: 0.9em;
+    height: 0.9em;
+
+    border: 1.5px solid rgb(59, 39, 60);
+
+    border-radius: 2px;
+
+    background: rgb(232, 220, 191);
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+
+/* Checked checkbox */
+
+.dayOffCheckbox:checked {
+    background-color: rgb(114, 207, 222);
+
+    box-shadow:
+        inset 0 0 0 2px rgb(232, 220, 191);
+}
+
+
+/* Disabled dropdowns */
+
+.workTimeSelect:disabled {
+    opacity: 0.45;
+}
+
+
+/* Done button */
+
+#saveWorkHours {
+    display: block;
+
+    margin: 3% auto 0 auto;
+
+    padding: 1% 10%;
+
+    background-color: rgb(114, 207, 222);
+
+    border: 2px solid rgb(59, 39, 60);
+
+    border-radius: 4px;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: 0.9em;
+
+    cursor: pointer;
+}
+
+#saveWorkHours:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 2px 2px 0 rgba(59, 39, 60, 0.3);
 }

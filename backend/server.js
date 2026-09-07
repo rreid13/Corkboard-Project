@@ -59,6 +59,31 @@ function getWeatherCondition(code) {
     return "Cloudy";
 }
 
+function getWeatherConditionForTime(code, isDay) {
+
+    if (code === 0 || code === 1) {
+
+        if (isDay === 0) {
+            return "Clear";
+        }
+
+        return "Sunny";
+    }
+
+
+    if (code === 2) {
+
+        if (isDay === 0) {
+            return "Partly Clear";
+        }
+
+        return "Partly Cloudy";
+    }
+
+
+    return getWeatherCondition(code);
+}
+
 
 app.use(express.json());
 
@@ -169,9 +194,9 @@ app.get("/api/weather", async (req, res) => {
         `https://api.open-meteo.com/v1/forecast` +
         `?latitude=${LAT}` +
         `&longitude=${LON}` +
-        `&current=temperature_2m,weather_code` +
-        `&hourly=temperature_2m,weather_code` +
-        `&daily=weather_code,temperature_2m_max,temperature_2m_min` +
+        `&current=temperature_2m,weather_code,is_day` +
+        `&hourly=temperature_2m,weather_code,is_day` +
+        `&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset` +
         `&timezone=Europe%2FLondon` +
         `&forecast_days=7`;
 
@@ -189,7 +214,11 @@ app.get("/api/weather", async (req, res) => {
         // CURRENT WEATHER
 
         const current = {
-            condition: getWeatherCondition(data.current.weather_code),
+            condition: getWeatherConditionForTime(
+                data.current.weather_code,
+                data.current.is_day
+            ),
+
             temperature: Math.round(data.current.temperature_2m)
         };
 
@@ -215,8 +244,9 @@ app.get("/api/weather", async (req, res) => {
             const index = currentHour + i;
 
             hourly.push({
-                condition: getWeatherCondition(
-                    data.hourly.weather_code[index]
+                condition: getWeatherConditionForTime(
+                    data.hourly.weather_code[index],
+                    data.hourly.is_day[index]
                 ),
 
                 temperature: Math.round(data.hourly.temperature_2m[index])
@@ -266,4 +296,35 @@ app.get("/api/weather", async (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+});
+
+app.post("/api/workHours", (req, res) => {
+
+    try {
+
+        const filePath =
+            path.join(__dirname, "../JSONfiles/workHours.json");
+
+
+        fs.writeFileSync(
+            filePath,
+            JSON.stringify(req.body, null, 4)
+        );
+
+
+        res.json({
+            message: "Work hours saved"
+        });
+
+    }
+
+    catch (error) {
+
+        console.error("Error saving work hours:", error);
+
+        res.status(500).json({
+            error: "Failed to save work hours"
+        });
+    }
+
 });

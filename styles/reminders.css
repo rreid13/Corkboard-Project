@@ -32,7 +32,7 @@
     width: 13%;
     height: 18%;
 
-    z-index: 100;
+    z-index: 80;
 
     color: rgb(59, 39, 60);
 
@@ -44,7 +44,8 @@
 .reminder {
     margin-bottom: 0.32em;
     cursor: pointer;
-    transition: 0.2s ease
+    transition: 0.2s ease;
+    z-index: 81;
 }
 
 .reminder:hover {
@@ -82,27 +83,9 @@
     left: 37.6%;
     top: 5.2%;
     width: 18%;
-}
-
-#reminderList {
-    position: absolute;
-
-    left: 39.5%;
-    top: 20.4%;
-
-    width: 13%;
-    height: 18%;
-
-    z-index: 100;
-
-    color: rgb(59, 39, 60);
-
-    font-family: "RionaHandwriting", sans-serif;
-
-    font-size: calc(1.5 / 100 * min(100vw, 160vh));
+    z-index: 1;
 }
 
 .reminder {
     margin-bottom: 0.32em;
 }
-

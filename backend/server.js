@@ -120,6 +120,9 @@ app.post("/api/reminders", (req, res) => {
 
 app.get("/api/tides", async (req, res) => {
 
+    const LAT = req.query.lat;
+    const LON = req.query.lon;
+
     const url =
         `https://erddap.marine.ie/erddap/tabledap/` +
         `IMI_TidePrediction_HighLow.json` +
@@ -159,8 +162,8 @@ app.get("/api/tides", async (req, res) => {
 
 app.get("/api/weather", async (req, res) => {
 
-    const LAT = 55.19345254991711;
-    const LON = -7.836906631516278;
+    const LAT = req.query.lat;
+    const LON = req.query.lon;
 
     const url =
         `https://api.open-meteo.com/v1/forecast` +

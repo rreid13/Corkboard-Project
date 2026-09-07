@@ -36,7 +36,6 @@
 }
 
 #weatherCardBack,
-#sunnySea,
 #foldedCardFront {
     position: absolute;
     left: 63.5%;
@@ -48,7 +47,11 @@
     z-index: 1;
 }
 
-#sunnySea {
+#foldedCardBackground {
+    position: absolute;
+    left: 65%;
+    top: 10%;
+    width: 28%;
     z-index: 2;
 }
 
@@ -292,4 +295,9 @@
 .dailyTemperature {
     font-size: calc(1.8 / 100 * min(100vw, 160vh));
     white-space: nowrap;
+}
+
+#weatherText.night,
+#tideText.night {
+    color: rgb(229, 229, 229);
 }

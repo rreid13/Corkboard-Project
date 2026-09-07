@@ -8,8 +8,9 @@ async function getWeather() {
     if (WEATHER_TEST_DATA) {
         weather = {
             current: {
-                condition: "Sunny",
-                temperature: 18
+                condition: "Rain",
+                temperature: 18,
+                is_day: 0
             },
 
             today: {
@@ -18,18 +19,18 @@ async function getWeather() {
             },
 
             hourly: [
-                { condition: "Sunny", temperature: 18 },
+                { condition: "Snow", temperature: 18 },
                 { condition: "Sunny", temperature: 17 },
-                { condition: "Clear", temperature: 16 },
-                { condition: "Clear", temperature: 15 },
-                { condition: "Cloudy", temperature: 15 },
-                { condition: "Cloudy", temperature: 14 },
-                { condition: "Rain", temperature: 14 },
-                { condition: "Rain", temperature: 13 },
-                { condition: "Cloudy", temperature: 13 },
-                { condition: "Sunny", temperature: 14 },
-                { condition: "Sunny", temperature: 16 },
-                { condition: "Sunny", temperature: 18 }
+                { condition: "Wind", temperature: 16 },
+                { condition: "Fog", temperature: 15 },
+                { condition: "Hail", temperature: 15 },
+                { condition: "Heavy Rain", temperature: 14 },
+                { condition: "Heavy Snow", temperature: 14 },
+                { condition: "Lightning", temperature: 13 },
+                { condition: "Light Rain", temperature: 13 },
+                { condition: "Partly Clear", temperature: 14 },
+                { condition: "Partly Cloudy", temperature: 16 },
+                { condition: "Rain", temperature: 18 }
             ],
 
             daily: [
@@ -43,19 +44,19 @@ async function getWeather() {
 
             ]
         };
-   } else {
+    } else {
 
-    const location = getSelectedLocation();
+        const location = getSelectedLocation();
 
-    console.log("Selected location:", location);
-    console.log("Weather URL:", `/api/weather?lat=${location.lat}&lon=${location.lon}`);
+        console.log("Selected location:", location);
+        console.log("Weather URL:", `/api/weather?lat=${location.lat}&lon=${location.lon}`);
 
-    const response = await fetch(
-        `/api/weather?lat=${location.lat}&lon=${location.lon}`
-    );
+        const response = await fetch(
+            `/api/weather?lat=${location.lat}&lon=${location.lon}`
+        );
 
-    weather = await response.json();
-}
+        weather = await response.json();
+    }
 
     console.log(weather);
     displayWeather(weather);
@@ -78,7 +79,7 @@ const weatherExpanded = document.getElementById("weatherExpanded");
 foldedWeatherIcon.addEventListener("click", function () {
     weatherExpanded.classList.toggle("open");
     document.getElementById("foldedCardFront").classList.toggle("hidden");
-    document.getElementById("sunnySea").classList.toggle("hidden");
+    document.getElementById("foldedCardBackground").classList.toggle("hidden");
     document.getElementById("tideText").classList.toggle("hidden");
     document.getElementById("weatherText").classList.toggle("hidden");
 });
@@ -86,7 +87,7 @@ foldedWeatherIcon.addEventListener("click", function () {
 foldTab.addEventListener("click", function () {
     weatherExpanded.classList.toggle("open");
     document.getElementById("foldedCardFront").classList.toggle("hidden");
-    document.getElementById("sunnySea").classList.toggle("hidden");
+    document.getElementById("foldedCardBackground").classList.toggle("hidden");
     document.getElementById("tideText").classList.toggle("hidden");
     document.getElementById("weatherText").classList.toggle("hidden");
 });
@@ -128,10 +129,12 @@ function displayCurrentWeather(weather) {
         `↓ ${weather.today.low}°C`;
 
     document.getElementById("currentCondition").textContent =
-        `Today is ${weather.current.condition}!`;
+        getWeatherMessage(weather.current.condition);
 
     displayHourlyWeather(weather);
     displayDailyWeather(weather);
+    displayWeatherBackground(weather);
+    updateCardTextColour(weather);
 }
 
 function displayHourlyWeather(weather) {
@@ -248,4 +251,96 @@ function displayDailyWeather(weather) {
     });
 
     dailyWeatherContainer.innerHTML = html;
+}
+
+function getWeatherMessage(condition) {
+
+    const messages = {
+        "Sunny": "It's sunny today!",
+        "Clear": "It's clear tonight!",
+        "Cloudy": "It's cloudy today!",
+        "Partly Cloudy": "It's partly cloudy today!",
+        "Partly Clear": "It's partly clear tonight!",
+        "Rain": "It's rainy today!",
+        "Light Rain": "There's light rain today!",
+        "Heavy Rain": "There's heavy rain today!",
+        "Snow": "It's snowy today!",
+        "Heavy Snow": "It's snowing heavily today!",
+        "Blowing Snow": "It's blowing snow today!",
+        "Fog": "It's foggy today!",
+        "Hail": "It's hailing today!",
+        "Lightning": "Theres lightning today!",
+        "Wind": "It's windy today!"
+    };
+
+    return messages[condition] || `Today is ${condition.toLowerCase()}!`;
+}
+
+function displayWeatherBackground(weather) {
+
+    const backgrounds = {
+        bright: "brightBackground.PNG",
+        grey: "greyBackground.PNG",
+        dull: "dullBackground.PNG",
+        starry: "starryBackground.PNG"
+    };
+
+    let background;
+
+    // Night always gets the starry background
+    if (weather.current.is_day === 0) {
+        background = backgrounds.starry;
+    }
+
+    else if (
+        weather.current.condition === "Clear" ||
+        weather.current.condition === "Partly Clear"
+    ) {
+        background = backgrounds.starry;
+    }
+
+    // Bright conditions
+    else if (
+        weather.current.condition === "Sunny" ||
+        weather.current.condition === "Partly Cloudy" ||
+        weather.current.condition === "Light Rain" ||
+        weather.current.condition === "Snow" ||
+        weather.current.condition === "Cloudy" ||
+        weather.current.condition === "Wind"
+    ) {
+        background = backgrounds.bright;
+    }
+
+    // Grey conditions
+    else if (
+        weather.current.condition === "Fog" ||
+        weather.current.condition === "Heavy Snow" ||
+        weather.current.condition === "Blowing Snow" ||
+        weather.current.condition === "Hail"
+    ) {
+        background = backgrounds.grey;
+    }
+
+    // Dull conditions
+    else if (
+        weather.current.condition === "Rain" ||
+        weather.current.condition === "Heavy Rain" ||
+        weather.current.condition === "Lightning"
+    ) {
+        background = backgrounds.dull;
+    }
+
+    document.getElementById("foldedCardBackground").src =
+        `../Assets/components/weatherTideCard/backgrounds/${background}`;
+}
+
+function updateCardTextColour(weather) {
+
+    if (weather.current.is_day === 0 || weather.current.condition === "Clear" || weather.current.condition === "Partly Clear") {
+        document.getElementById("weatherText").classList.add("night");
+        document.getElementById("tideText").classList.add("night");
+    } else {
+        document.getElementById("weatherText").classList.remove("night");
+        document.getElementById("tideText").classList.remove("night");
+    }
 }

@@ -2,7 +2,7 @@
 
 > A personalised desktop-style productivity dashboard designed around the information I need throughout my day.
 
-[preview image]
+![A screenshot of the corkboard](corkboardScreenshot.png).
 
 ## Why I Built It
 

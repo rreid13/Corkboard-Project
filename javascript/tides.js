@@ -1,4 +1,5 @@
 const TIDE_TEST_DATA = false;
+let tideData = null;
 
 
 async function getTides() {
@@ -23,11 +24,11 @@ async function getTides() {
     } else {
 
         const response = await fetch("/api/tides");
-        const tideData = await response.json();
+        const responseTideData = await response.json();
 
         const extremes = [];
 
-        tideData.table.rows.forEach(row => {
+        responseTideData.table.rows.forEach(row => {
 
             const time = row[1];
             const type = row[2];
@@ -47,63 +48,185 @@ async function getTides() {
 
     console.log(data);
 
-    let nextHigh = null;
-    let nextLow = null;
+    tideData = data;
 
     const now = new Date();
 
-    data.extremes.forEach(tide => {
+    let nextHigh = null;
+    let nextLow = null;
+
+
+    /* Find today's tides */
+
+    const today = now.toDateString();
+
+    const todaysTides = tideData.extremes
+        .filter(tide => {
+
+            const tideDate = new Date(tide.dt * 1000);
+
+            return tideDate.toDateString() === today;
+
+        })
+        .sort((a, b) => a.dt - b.dt);
+
+
+    /* Find next high and next low */
+
+    tideData.extremes.forEach(tide => {
 
         const tideTime = new Date(tide.dt * 1000);
 
         if (tideTime > now) {
 
-            if (tide.type === "High" && !nextHigh) {
+            if (tide.type === "High" && nextHigh === null) {
                 nextHigh = tide;
             }
 
-            else if (tide.type === "Low" && !nextLow) {
+            if (tide.type === "Low" && nextLow === null) {
                 nextLow = tide;
             }
+
         }
+
     });
 
-    displayTides(nextHigh, nextLow);
+
+    displayTides(nextHigh, nextLow, todaysTides);
 }
 
 
-function displayTides(high, low) {
+function displayTides(nextHigh, nextLow, todaysTides) {
 
     const options = {
-        hour: "2-digit",
+        hour: "numeric",
         minute: "2-digit",
         hour12: true
     };
 
-    const highTime = new Date(high.dt * 1000);
-    const lowTime = new Date(low.dt * 1000);
 
-    let html = "";
+    /*
+     * Folded card
+     */
 
-    if (highTime < lowTime) {
-        html = `
-            ↑ : ${highTime.toLocaleTimeString([], options)}
-            <br>
-            ↓ : ${lowTime.toLocaleTimeString([], options)}
-        `;
+    const nextHighTime = new Date(nextHigh.dt * 1000);
+    const nextLowTime = new Date(nextLow.dt * 1000);
+
+    let foldedHTML = "";
+
+    if (nextHighTime < nextLowTime) {
+
+        foldedHTML =
+            `↑ : ${nextHighTime.toLocaleTimeString([], options)}<br>
+             ↓ : ${nextLowTime.toLocaleTimeString([], options)}`;
+
     } else {
-        html = `
-            ↓ : ${lowTime.toLocaleTimeString([], options)}
-            <br>
-            ↑ : ${highTime.toLocaleTimeString([], options)}
-        `;
+
+        foldedHTML =
+            `↓ : ${nextLowTime.toLocaleTimeString([], options)}<br>
+             ↑ : ${nextHighTime.toLocaleTimeString([], options)}`;
+
     }
 
-    document.getElementById("tideText").innerHTML = html;
+    document.getElementById("tideText").innerHTML = foldedHTML;
+
+
+    /*
+     * Expanded card - all tides today
+     */
+
+    let todayHTML = "";
+
+    todaysTides.forEach(tide => {
+
+        const tideTime = new Date(tide.dt * 1000);
+
+        const arrow = tide.type === "High" ? "↑" : "↓";
+
+        todayHTML += `
+            <div class="todayTide">
+                ${arrow} ${tide.type}: ${tideTime.toLocaleTimeString([], options)}
+            </div>
+        `;
+
+    });
+
+    document.getElementById("todayTides").innerHTML = todayHTML;
+
+
+    /*
+     * Current tide status + next tide
+     */
+
+    const now = new Date();
+
+    let nextTide = null;
+
+
+    /* Find the next extreme */
+
+    tideData.extremes.forEach(tide => {
+
+        const tideTime = new Date(tide.dt * 1000);
+
+        if (tideTime > now) {
+
+            if (
+                nextTide === null ||
+                tideTime < new Date(nextTide.dt * 1000)
+            ) {
+                nextTide = tide;
+            }
+
+        }
+
+    });
+
+
+    /* Display current status and next tide */
+
+    if (nextTide) {
+
+        const nextTideTime =
+            new Date(nextTide.dt * 1000);
+
+
+        /* Rising if next tide is High */
+
+        const status =
+            nextTide.type === "High"
+                ? "Rising"
+                : "Falling";
+
+
+        document.getElementById("tideStatus").textContent =
+            `Current status: ${status}`;
+
+
+        /* Calculate time remaining */
+
+        const difference =
+            nextTideTime - now;
+
+        const totalMinutes =
+            Math.floor(difference / 60000);
+
+        const hours =
+            Math.floor(totalMinutes / 60);
+
+        const minutes =
+            totalMinutes % 60;
+
+
+        document.getElementById("nextTide").innerHTML =
+            `Next ${nextTide.type.toLowerCase()} tide:<br>${nextTideTime.toLocaleTimeString([], options)}<br>(${hours}h ${minutes}m)`;
+
+    }
+
 }
 
-
 getTides();
+
 
 const foldedWave = document.getElementById("foldedWave");
 

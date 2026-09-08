@@ -303,9 +303,9 @@
 
 #foldedWave {
     position: absolute;
-    left: 65%;
-    top: 24%;
-    width: 28%;
+    left: 65.5%;
+    top: 24.5%;
+    width: 27%;
     z-index: 3;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -314,6 +314,9 @@
 #foldedWave:hover {
     filter: drop-shadow(1.5px 0 0 white) drop-shadow(-1.5px 0 0 white) drop-shadow(0 1.5px 0 white) drop-shadow(0 -1.5px 0 white);
 }
+/* =========================
+   EXPANDED TIDE CARD
+   ========================= */
 
 #tideView {
     display: none;
@@ -324,16 +327,20 @@
     top: 0;
 
     width: 100%;
+    height: 100%;
 
     z-index: 2;
 }
+
+
+/* Top wave animation */
 
 #tideTop {
     position: absolute;
 
     left: 10%;
-    top: 10%;
-    transform: translateY(14.5%);
+    top: 7%;
+    transform: translateY(15%);
 
     width: 80%;
 
@@ -347,34 +354,122 @@
     height: auto;
 }
 
-#tideTitle {
+
+/* Today's tides */
+
+#tideToday {
     position: absolute;
 
-    left: 10%;
-    top: 45%;
+    left: 12%;
+    top: 50%;
+    transform: translateY(175%);
 
     width: 80%;
 
-    text-align: center;
-
     font-family: "RionaHandwriting", sans-serif;
-    font-size: calc(3 / 100 * min(100vw, 160vh));
-
     color: rgb(59, 39, 60);
 
     z-index: 3;
 }
 
-#expandedTides {
+#tideTitle {
+    width: 100%;
+
+    text-align: left;
+
+    font-size: calc(2.5 / 100 * min(100vw, 160vh));
+
+    margin-bottom: calc(1 / 100 * min(100vw, 160vh));
+}
+
+#todayTides {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    transform: translateX(-5%);
+
+    row-gap: 0;
+}
+
+.todayTide {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5%;
+
+    font-size: calc(1.6 / 100 * min(100vw, 160vh));
+}
+
+
+/* Current tide information */
+
+#tideCurrent {
     position: absolute;
 
-    left: 10%;
-    top: 55%;
+    left: 15%;
+    top: 52%;
 
     width: 80%;
 
     font-family: "RionaHandwriting", sans-serif;
     color: rgb(59, 39, 60);
+
+    z-index: 3;
+}
+
+#tideStatus {
+    
+    font-size: calc(2.5 / 100 * min(100vw, 160vh));
+    position: absolute;
+
+    left: -7%;
+    top: 430%;
+
+    margin-bottom: calc(1 / 100 * min(100vw, 160vh));
+}
+
+#nextTide {
+    font-size: calc(1.8 / 100 * min(100vw, 160vh));
+    transform: translateY(480%) translateX(-7%);
+}
+
+
+/* Middle wave */
+
+#tideWave {
+    position: absolute;
+
+    left: 2.8%;
+    top: 63%;
+    transform: translateY(296.5%);
+
+    width: 84%;
+
+    z-index: 2;
+}
+
+#tideWaveAnimation {
+    display: block;
+
+    width: 100%;
+    height: auto;
+}
+
+
+/* Graph */
+
+#tideGraph {
+    position: absolute;
+
+    left: 10%;
+    top: 76%;
+
+    width: 80%;
+    height: 24%;
 
     z-index: 3;
 }

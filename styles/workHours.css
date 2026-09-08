@@ -23,6 +23,8 @@
     font-size: calc(1.5 / 100 * min(100vw, 160vh));
 
     opacity: 1;
+    pointer-events: none;
+
     transition: opacity 0.3s ease;
 }
 

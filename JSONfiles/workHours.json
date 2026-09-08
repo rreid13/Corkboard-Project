@@ -5,6 +5,12 @@
     "wednesday": null,
     "thursday": null,
     "friday": null,
-    "saturday": null,
-    "sunday": null
+    "saturday": {
+        "start": 7,
+        "end": 13
+    },
+    "sunday": {
+        "start": 9,
+        "end": 17
+    }
 }

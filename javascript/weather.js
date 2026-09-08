@@ -77,19 +77,31 @@ const foldTab = document.getElementById("foldTab");
 const weatherExpanded = document.getElementById("weatherExpanded");
 
 foldedWeatherIcon.addEventListener("click", function () {
-    weatherExpanded.classList.toggle("open");
-    document.getElementById("foldedCardFront").classList.toggle("hidden");
-    document.getElementById("foldedCardBackground").classList.toggle("hidden");
-    document.getElementById("tideText").classList.toggle("hidden");
-    document.getElementById("weatherText").classList.toggle("hidden");
+
+    weatherExpanded.classList.add("open");
+
+    document.getElementById("weatherView").style.display = "block";
+    document.getElementById("tideView").style.display = "none";
+
+    document.getElementById("foldedCardFront").classList.add("hidden");
+    document.getElementById("foldedCardBackground").classList.add("hidden");
+    document.getElementById("tideText").classList.add("hidden");
+    document.getElementById("weatherText").classList.add("hidden");
+
 });
 
 foldTab.addEventListener("click", function () {
-    weatherExpanded.classList.toggle("open");
-    document.getElementById("foldedCardFront").classList.toggle("hidden");
-    document.getElementById("foldedCardBackground").classList.toggle("hidden");
-    document.getElementById("tideText").classList.toggle("hidden");
-    document.getElementById("weatherText").classList.toggle("hidden");
+
+    weatherExpanded.classList.remove("open");
+
+    document.getElementById("weatherView").style.display = "block";
+    document.getElementById("tideView").style.display = "none";
+
+    document.getElementById("foldedCardFront").classList.remove("hidden");
+    document.getElementById("foldedCardBackground").classList.remove("hidden");
+    document.getElementById("tideText").classList.remove("hidden");
+    document.getElementById("weatherText").classList.remove("hidden");
+
 });
 
 function displayCurrentWeather(weather) {

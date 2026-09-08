@@ -104,3 +104,19 @@ function displayTides(high, low) {
 
 
 getTides();
+
+const foldedWave = document.getElementById("foldedWave");
+
+foldedWave.addEventListener("click", function () {
+
+    document.getElementById("weatherExpanded").classList.add("open");
+
+    document.getElementById("weatherView").style.display = "none";
+    document.getElementById("tideView").style.display = "block";
+
+    document.getElementById("foldedCardFront").classList.add("hidden");
+    document.getElementById("foldedCardBackground").classList.add("hidden");
+    document.getElementById("tideText").classList.add("hidden");
+    document.getElementById("weatherText").classList.add("hidden");
+
+});

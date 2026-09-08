@@ -191,10 +191,8 @@
 #todayHigh,
 #todayLow {
     font-size: calc(3 / 100 * min(100vw, 160vh));
-    transform: translate(
-        calc(2 / 100 * min(100vw, 160vh)),
-        calc(1 / 100 * min(100vw, 160vh))
-    );
+    transform: translate(calc(2 / 100 * min(100vw, 160vh)),
+            calc(1 / 100 * min(100vw, 160vh)));
 }
 
 
@@ -267,12 +265,12 @@
 
     font-family: "RionaHandwriting", sans-serif;
     color: rgb(59, 39, 60);
-    
+
 }
 
 .dailyDate {
     width: 25%;
-     font-size: calc(1.8 / 100 * min(100vw, 160vh));
+    font-size: calc(1.8 / 100 * min(100vw, 160vh));
 
     display: flex;
     align-items: center;
@@ -314,5 +312,69 @@
 }
 
 #foldedWave:hover {
-   filter: drop-shadow(1.5px 0 0 white) drop-shadow(-1.5px 0 0 white) drop-shadow(0 1.5px 0 white) drop-shadow(0 -1.5px 0 white);
+    filter: drop-shadow(1.5px 0 0 white) drop-shadow(-1.5px 0 0 white) drop-shadow(0 1.5px 0 white) drop-shadow(0 -1.5px 0 white);
+}
+
+#tideView {
+    display: none;
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+
+    z-index: 2;
+}
+
+#tideTop {
+    position: absolute;
+
+    left: 10%;
+    top: 10%;
+    transform: translateY(14.5%);
+
+    width: 80%;
+
+    z-index: 3;
+}
+
+#topTideAnimation {
+    display: block;
+
+    width: 100%;
+    height: auto;
+}
+
+#tideTitle {
+    position: absolute;
+
+    left: 10%;
+    top: 45%;
+
+    width: 80%;
+
+    text-align: center;
+
+    font-family: "RionaHandwriting", sans-serif;
+    font-size: calc(3 / 100 * min(100vw, 160vh));
+
+    color: rgb(59, 39, 60);
+
+    z-index: 3;
+}
+
+#expandedTides {
+    position: absolute;
+
+    left: 10%;
+    top: 55%;
+
+    width: 80%;
+
+    font-family: "RionaHandwriting", sans-serif;
+    color: rgb(59, 39, 60);
+
+    z-index: 3;
 }

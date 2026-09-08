@@ -153,7 +153,7 @@ app.get("/api/tides", async (req, res) => {
         `IMI_TidePrediction_HighLow.json` +
         `?stationID,time,tide_time_category,Water_Level_ODMalin` +
         `&stationID="Buncranna"` +
-        `&time>=now` +
+        `&time>=now-1day` +
         `&time<=now%2B2%20days`;
 
     try {

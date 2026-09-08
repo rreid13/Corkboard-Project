@@ -328,3 +328,144 @@ app.post("/api/workHours", (req, res) => {
     }
 
 });
+
+app.put("/api/events/:index", (req, res) => {
+
+    const eventsPath = path.join(
+        __dirname,
+        "..",
+        "JSONfiles",
+        "events.json"
+    );
+
+    try {
+
+        const events =
+            JSON.parse(fs.readFileSync(eventsPath, "utf8"));
+
+        const index =
+            Number(req.params.index);
+
+
+        if (
+            index < 0 ||
+            index >= events.length
+        ) {
+            return res.status(404).json({
+                error: "Event not found"
+            });
+        }
+
+
+        events[index] = req.body;
+
+
+        fs.writeFileSync(
+            eventsPath,
+            JSON.stringify(events, null, 4)
+        );
+
+
+        res.json({
+            success: true,
+            event: events[index]
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            error: "Failed to update event"
+        });
+
+    }
+
+});
+
+app.delete("/api/events/:index", (req, res) => {
+
+    const eventsPath = path.join(
+        __dirname,
+        "..",
+        "JSONfiles",
+        "events.json"
+    );
+
+    try {
+
+        const events =
+            JSON.parse(fs.readFileSync(eventsPath, "utf8"));
+
+        const index =
+            Number(req.params.index);
+
+
+        if (
+            index < 0 ||
+            index >= events.length
+        ) {
+            return res.status(404).json({
+                error: "Event not found"
+            });
+        }
+
+
+        events.splice(index, 1);
+
+
+        fs.writeFileSync(
+            eventsPath,
+            JSON.stringify(events, null, 4)
+        );
+
+
+        res.json({
+            success: true
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            error: "Failed to delete event"
+        });
+
+    }
+
+});
+
+app.post("/api/events", (req, res) => {
+
+    const eventsPath =
+        path.join(__dirname, "..", "JSONfiles", "events.json");
+
+    try {
+
+        const events =
+            JSON.parse(fs.readFileSync(eventsPath, "utf8"));
+
+        events.push(req.body);
+
+        fs.writeFileSync(
+            eventsPath,
+            JSON.stringify(events, null, 4)
+        );
+
+        res.json({
+            success: true,
+            event: req.body
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            error: "Failed to add event"
+        });
+
+    }
+
+});

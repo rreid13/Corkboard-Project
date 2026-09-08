@@ -310,11 +310,20 @@ function displayWeatherBackground(weather) {
     let wave;
 
     const condition = weather.current.condition;
-    const isNight = weather.current.is_day === 0;
+    const isNight = Number(weather.current.is_day) === 0;
 
     // Determine background
     if (isNight) {
         background = backgrounds.starry;
+    }
+
+     else if (
+        condition === "Clear" ||
+        condition === "Partly Clear"
+    ) {
+
+        background = backgrounds.starry;
+
     }
 
     else if (
@@ -386,6 +395,13 @@ function displayWeatherBackground(weather) {
             wave = waves.dullCalm;
         }
 
+        else if (
+            condition === "Clear" ||
+            condition === "Partly Clear"
+        ) {
+            wave = waves.nightCalm;
+        }
+
         else {
             wave = waves.dayCalm;
         }
@@ -400,7 +416,7 @@ function displayWeatherBackground(weather) {
 
 function updateCardTextColour(weather) {
 
-    if (weather.current.is_day === 0) {
+    if (Number(weather.current.is_day) === 0 || weather.current.condition === "Clear" || weather.current.condition === "Partly Clear") {
         document.getElementById("weatherText").classList.add("night");
         document.getElementById("tideText").classList.add("night");
     } else {

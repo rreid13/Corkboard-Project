@@ -70,6 +70,11 @@
 
 }
 
+#calendarPen.editing {
+    bottom: 28%;
+    left: 7%;
+}
+
 #locationPen {
     position: absolute;
     left: 9.8%;

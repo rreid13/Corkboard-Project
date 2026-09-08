@@ -1,0 +1,58 @@
+[
+    {
+        "date": "2026-09-15",
+        "name": "My Birthday",
+        "startTime": "10:00",
+        "endTime": "11:00",
+        "allDay": true,
+        "type": "birthday"
+    },
+    {
+        "date": "2026-09-24",
+        "name": "TechIreland Conference",
+        "startTime": "09:00",
+        "endTime": "17:00",
+        "allDay": false,
+        "type": "work"
+    },
+    {
+        "date": "2026-09-21",
+        "name": "Back to uni",
+        "startTime": "",
+        "endTime": "",
+        "allDay": true,
+        "type": "university"
+    },
+    {
+        "date": "2026-09-13",
+        "name": "move in day?",
+        "startTime": "",
+        "endTime": "",
+        "allDay": true,
+        "type": "university"
+    },
+    {
+        "date": "2026-09-11",
+        "name": "shopping",
+        "startTime": "11:00",
+        "endTime": "17:00",
+        "allDay": false,
+        "type": "personal"
+    },
+    {
+        "date": "2026-09-14",
+        "name": "birthday party",
+        "startTime": "21:00",
+        "endTime": "23:59",
+        "allDay": false,
+        "type": "personal"
+    },
+    {
+        "date": "2026-09-22",
+        "name": "Niamh's birthday",
+        "startTime": "",
+        "endTime": "",
+        "allDay": true,
+        "type": "birthday"
+    }
+]

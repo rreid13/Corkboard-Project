@@ -57,10 +57,18 @@ The result is a dashboard that functions as a productivity tool while retaining 
   - Automatic calculation and display of daily hours
   - Interactive editing mode
   - Day-off functionality
+  - Persistent storage using JSON
 
 - **Calendar**
-  - Current date
-  - Calendar interface
+  - Monthly calendar interface
+  - Current date indicator
+  - Event indicators on calendar dates
+  - View events for individual dates
+  - Add, edit and delete events
+  - Event categories
+  - All-day and timed events
+  - Interactive edit mode
+  - Persistent event storage using JSON
 
 - **Daily Observances**
   - Displays a randomly selected secular/national observance for the current day
@@ -77,7 +85,7 @@ Corkboard is served locally using a Node.js and Express backend.
 
 The frontend is responsible for displaying the corkboard, handling user interaction, and communicating with the backend. JavaScript retrieves data from local JSON files and backend API endpoints, then dynamically updates the relevant elements of the interface.
 
-The backend acts as an intermediary between the frontend, local data files, and external APIs. This allows data such as reminders and working hours to be modified and persisted while external API requests are handled outside of the client-side code.
+The backend acts as an intermediary between the frontend, local data files, and external APIs. This allows data such as reminders, working hours and calendar events to be modified and persisted while external API requests are handled outside of the client-side code.
 
 ## Technical Implementation
 
@@ -87,7 +95,7 @@ The backend acts as an intermediary between the frontend, local data files, and 
 - CSS for positioning, responsive sizing, transitions and animations
 - JavaScript for DOM manipulation and user interaction
 - Fetch API for communicating with backend endpoints
-- Local JSON datasets for static information
+- Local JSON datasets for persistent and static information
 
 ### Backend
 
@@ -101,7 +109,7 @@ The backend acts as an intermediary between the frontend, local data files, and 
 
 - **Open-Meteo** for weather data
 - **Irish Marine Institute ERDDAP** for tide predictions
-- Local JSON datasets for reminders, working hours and daily observances
+- Local JSON datasets for reminders, working hours, calendar events and daily observances
 
 API requests for external data are routed through the Node.js backend rather than being made directly from client-side JavaScript.
 
@@ -114,8 +122,10 @@ API requests for external data are routed through the Node.js backend rather tha
 - Hover states provide visual feedback
 - The weather/tide card expands to reveal additional information
 - Editing modes change the behaviour and appearance of individual sections
+- Calendar events can be added, edited and deleted directly from the interface
 - Weather conditions determine which graphical animation is displayed
 - Location selection allows the information displayed to change based on context
+- Transitions and animations provide visual feedback when navigating between different views
 
 Rather than placing conventional buttons over the interface, I wanted interactions to feel like manipulating a physical corkboard.
 
@@ -133,9 +143,11 @@ Initially, reminders were loaded directly from a JSON file. When I wanted to add
 
 I implemented Express endpoints for retrieving, adding and deleting reminders, allowing the frontend to communicate with the JSON data through HTTP requests.
 
+This approach was later extended to working hours and calendar events, allowing changes made through the interface to persist between sessions.
+
 ### Persistent Data
 
-Adding a reminder dynamically to the page was relatively straightforward, but making the change persistent required communication between the browser, Express, and the JSON file.
+Adding information dynamically to the page was relatively straightforward, but making changes persistent required communication between the browser, Express, and the JSON files.
 
 This helped me understand the difference between changing the state of a webpage and actually persisting that state so that it remains after the page is refreshed.
 
@@ -153,22 +165,29 @@ Because the interface is designed around a fixed illustrated corkboard rather th
 
 I experimented with percentages, pixel dimensions, viewport units, and CSS calculations to find suitable approaches for different elements. Through this, I developed a much better understanding of how CSS positioning and responsive sizing can be combined to create non-standard layouts.
 
+### Building Interactive UI States
+
+As the project became more interactive, different sections needed their own editing and viewing states.
+
+For example, the calendar can transition between the monthly view, an individual day's events, and event editing/creation. I used CSS transitions, overlapping elements and JavaScript-controlled classes to create these transitions while keeping the underlying HTML structure manageable.
+
 ## Future Development
 
 ### Short Term
 
-- Complete remaining weather graphics
+- Add the "Today's Plan" section
+  - Display upcoming calendar events
+  - Display working hours
+  - Display the next few reminders
+  - Display the day's weather
 - Improve API error handling
-- Add calendar event interaction
-- Improve editing functionality
-- Refine responsive behaviour
-- Improve visual transitions and animations
+- Further refine responsive behaviour
+- Continue refining visual transitions and animations
 
 ### Long Term
 
 - Apple Calendar and Reminders integration
 - Seasonal visual themes
-- Tide visualisation
 - Automatic switching between university and work schedules
 - Additional location-specific information
 - Package as a desktop application
@@ -177,6 +196,8 @@ I experimented with percentages, pixel dimensions, viewport units, and CSS calcu
 
 **Active development**
 
-The core corkboard interface, interactive reminder system, weather integration, tide integration, work-hours editor, location selection and daily observance system are currently implemented.
+The core Corkboard interface and its main interactive features are currently implemented, including reminders, weather, tides, work hours, calendar events, location selection and daily observances.
 
-Further development is focused on refining the interface, improving responsiveness and adding additional integrations and functionality.
+The remaining core feature is the "Today's Plan" section, which will combine information from the existing calendar, reminders, working hours and weather features into a single daily overview.
+
+Future development will focus primarily on refinement, additional integrations, and expanding the dashboard beyond its current core functionality.

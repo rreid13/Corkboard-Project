@@ -54,28 +54,25 @@
 }
 
 #editingRemindersText {
-    position: absolute;
+   position: absolute;
 
-    left: 50%;
-    bottom: 5%;
-    transform: translateX(-50%);
+    left: 44%;
+    top: 87%;
 
-    padding: 1% 5%;
+    padding: 2% 2%;
 
+    background-color: rgb(182, 236, 228);
+    border: none;
+    transform: rotate(3deg);
+    box-shadow: 4px 4px 0 rgba(59, 39, 60, 0.2);
     font-family: "RionaHandwriting", sans-serif;
-    font-size: calc(2 / 100 * min(100vw, 160vh));
-
-    color: rgb(59, 39, 60);
-    background-color: rgb(114, 207, 222);
-
-    border: 2px solid rgb(59, 39, 60);
-    border-radius: 6px;
-    box-shadow: 5px 5px 0 rgba(59, 39, 60, 0.25);
 
     opacity: 0;
     pointer-events: none;
 
     transition: opacity 0.3s ease;
+
+    z-index: 102;
 }
 
 #editingRemindersText.visible {

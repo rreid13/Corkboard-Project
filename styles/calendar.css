@@ -19,7 +19,7 @@
 }
 
 .calendarHeading {
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     font-size: 2.0em;
     text-align: left;
 }
@@ -27,7 +27,7 @@
 .calendarGrid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
+    gap: 1.3px;
 }
 
 .calendarDay {
@@ -42,7 +42,7 @@
 .today::before {
     content: "";
     position: absolute;
-    top: 47%;
+    top: 35%;
     left: 51.5%;
     transform: translate(-50%, -60%);
     width: 1.9em;
@@ -51,4 +51,525 @@
     background-size: 1.9em;
     background-repeat: no-repeat;
     z-index: -1;
+}
+
+/* =========================
+   CALENDAR EVENT DOTS
+   ========================= */
+
+.eventDots {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 0.5px;
+
+    height: 0.5em;
+
+
+}
+
+
+.eventDot {
+    display: inline-block;
+
+    width: 0.35em;
+    height: 0.35em;
+
+    border-radius: 50%;
+
+    flex-shrink: 0;
+}
+
+
+/* Personal */
+
+.eventDot.personal {
+    background-color: rgb(74, 170, 170);
+}
+
+
+/* University */
+
+.eventDot.university {
+    background-color: rgb(130, 91, 180);
+}
+
+
+/* Work */
+
+.eventDot.work {
+    background-color: rgb(230, 145, 60);
+}
+
+
+/* Birthday */
+
+.eventDot.birthday {
+    background-color: rgb(220, 105, 145);
+}
+
+
+/* Other */
+
+.eventDot.other {
+    background-color: rgb(130, 130, 130);
+}
+
+/* =========================
+   CALENDAR EVENT DISPLAY
+   ========================= */
+
+#calendarView {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* =========================
+   EVENT VIEW
+   ========================= */
+
+#calendarEvents {
+    position: absolute;
+    left: 44.8%;
+    top: 60%;
+
+    width: 18%;
+    height: 22%;
+
+    z-index: 101;
+
+    font-family: "RionaHandwriting", sans-serif;
+    color: rgb(59, 39, 60);
+
+    font-size: calc(1.1 / 100 * min(100vw, 160vh));
+
+    text-align: left;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* When event view is active */
+
+#calendarView.showEvents #calendarEvents {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+/* =========================
+   EVENT VIEW CONTENT
+   ========================= */
+
+#calendarEventList,
+#calendarEditForm,
+#calendarAddForm {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    transition: opacity 0.3s ease;
+}
+
+
+/* Event list is shown by default */
+
+#calendarEventList {
+    opacity: 1;
+}
+
+
+/* Edit and Add forms are hidden by default */
+
+#calendarEditForm,
+#calendarAddForm {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* =========================
+   EVENT VIEW STATES
+   ========================= */
+
+#calendarEvents.editing #calendarEventList {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#calendarEvents.editing #calendarEditForm {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+#calendarEvents.adding #calendarEventList {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#calendarEvents.adding #calendarAddForm {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* =========================
+   CALENDAR FADE
+   ========================= */
+
+#calendarView.showEvents #calendar,
+#calendarView.showEvents #calendarText {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#calendar,
+#calendarText {
+    transition: opacity 0.3s ease;
+}
+
+
+/* =========================
+   EVENT CONTENT
+   ========================= */
+
+.calendarEventHeading {
+    font-size: 2em;
+    margin-bottom: 0.1em;
+}
+
+
+.calendarEvent {
+    margin-bottom: 0.2em;
+}
+
+
+.calendarEventName {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 1.3em;
+}
+
+
+.calendarEventTime {
+    font-size: 0.9em;
+}
+
+.calendarBackButton {
+    position: absolute;
+
+    width: 30%;
+    left: 0;
+    bottom: 0;
+
+    background-color: rgb(114, 207, 222);
+
+    border: 1px solid rgb(59, 39, 60);
+
+    border-radius: 4px;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: 0.9em;
+
+    cursor: pointer;
+}
+
+.calendarBackButton:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 2px 2px 0 rgba(59, 39, 60, 0.3);
+}
+
+.calendarAddButton {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+    width: 33%;
+
+    background-color: rgb(114, 207, 222);
+
+    border: 1px solid rgb(59, 39, 60);
+
+    border-radius: 4px;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: 0.9em;
+
+    cursor: pointer;
+}
+
+.calendarAddButton:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 2px 2px 0 rgba(59, 39, 60, 0.3);
+}
+
+.calendarEditHeading {
+    font-size: 1.7em;
+
+    margin-bottom: 0.5em;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#addEventName {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    padding: 0;
+
+    background: none;
+    border: none;
+    outline: none;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+    font-size: 1.7em;
+
+    margin-bottom: 0.5em;
+
+    white-space: nowrap;
+}
+
+#editEventName {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    padding: 0;
+
+    background: none;
+    border: none;
+    outline: none;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+    font-size: 1.7em;
+
+    margin-bottom: 0.5em;
+
+    white-space: nowrap;
+}
+
+
+.calendarEditForm {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 5%;
+    row-gap: 0.35em;
+}
+
+
+.editField {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+
+.editField label {
+    font-size: 0.8em;
+}
+
+
+.calendarEditForm input,
+.calendarEditForm select {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    padding: 2%;
+
+    background-color: rgba(255, 255, 255, 0.5);
+
+    border: 1px solid rgb(59, 39, 60);
+
+    border-radius: 3px;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: 0.8em;
+}
+
+
+.allDayLabel {
+    grid-column: 1 / 3;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.4em;
+
+    margin-top: 0.2em;
+
+    font-size: 0.85em;
+}
+
+
+.allDayLabel input {
+    width: auto;
+}
+
+.calendarEditButtons {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.calendarRightButtons {
+    display: flex;
+
+    gap: 4%;
+}
+
+.calendarCancelButton,
+.calendarSaveButton,
+.calendarDeleteButton {
+    padding: 1% 8%;
+
+    border: 1px solid rgb(59, 39, 60);
+    background-color: rgb(114, 207, 222);
+
+    border-radius: 4px;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: 0.9em;
+
+    cursor: pointer;
+}
+
+
+.calendarCancelButton,
+.calendarSaveButton {
+    background-color: rgb(114, 207, 222);
+    transform: translateX(-60%);
+}
+
+
+.calendarDeleteButton {
+    background-color: rgb(220, 105, 145);
+}
+
+
+.calendarCancelButton:hover,
+.calendarSaveButton:hover {
+    transform: translate(-60%, -2px);
+    box-shadow: 2px 2px 0 rgba(59, 39, 60, 0.3);
+}
+
+.calendarDeleteButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 2px 2px 0 rgba(59, 39, 60, 0.3);
+}
+
+.calendarAddEventCancelButton {
+    padding: 1% 8%;
+
+    border: 1px solid rgb(59, 39, 60);
+    background-color: rgb(114, 207, 222);
+
+    border-radius: 4px;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: 0.9em;
+
+    cursor: pointer;
+}
+
+.calendarAddEventCancelButton:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 2px 2px 0 rgba(59, 39, 60, 0.3);
+}
+
+.calendarAddEventButton {
+    padding: 1% 8%;
+
+    border: 1px solid rgb(59, 39, 60);
+    background-color: rgb(114, 207, 222);
+
+    border-radius: 4px;
+
+    color: rgb(59, 39, 60);
+
+    font-family: "RionaHandwriting", sans-serif;
+
+    font-size: 0.9em;
+
+    cursor: pointer;
+}
+
+.calendarAddEventButton:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 2px 2px 0 rgba(59, 39, 60, 0.3);
+}
+
+#calendarEditIndicator {
+    position: absolute;
+
+    left: 44%;
+    top: 87%;
+
+    padding: 2% 2%;
+
+    background-color: rgb(182, 236, 228);
+    border: none;
+    transform: rotate(-3deg);
+    box-shadow: 4px 4px 0 rgba(59, 39, 60, 0.2);
+    font-family: "RionaHandwriting", sans-serif;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.3s ease;
+
+    z-index: 102;
+}
+
+#calendarView.editing #calendarEditIndicator {
+    opacity: 1;
 }

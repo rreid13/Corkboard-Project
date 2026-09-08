@@ -8,7 +8,7 @@ async function getWeather() {
     if (WEATHER_TEST_DATA) {
         weather = {
             current: {
-                condition: "Rain",
+                condition: "Lightning",
                 temperature: 18,
                 is_day: 0
             },
@@ -285,58 +285,110 @@ function displayWeatherBackground(weather) {
         starry: "starryBackground.PNG"
     };
 
+    const waves = {
+        dayCalm: "dayCalmWave.PNG",
+        dayChoppy: "dayChoppyWave.PNG",
+        dullCalm: "dullCalmWave.PNG",
+        dullChoppy: "dullChoppyWave.PNG",
+        nightCalm: "nightCalmWave.PNG",
+        nightChoppy: "nightChoppyWave.PNG"
+    };
+
     let background;
+    let wave;
 
-    // Night always gets the starry background
-    if (weather.current.is_day === 0) {
+    const condition = weather.current.condition;
+    const isNight = weather.current.is_day === 0;
+
+    // Determine background
+    if (isNight) {
         background = backgrounds.starry;
     }
 
     else if (
-        weather.current.condition === "Clear" ||
-        weather.current.condition === "Partly Clear"
-    ) {
-        background = backgrounds.starry;
-    }
-
-    // Bright conditions
-    else if (
-        weather.current.condition === "Sunny" ||
-        weather.current.condition === "Partly Cloudy" ||
-        weather.current.condition === "Light Rain" ||
-        weather.current.condition === "Snow" ||
-        weather.current.condition === "Cloudy" ||
-        weather.current.condition === "Wind"
+        condition === "Sunny" ||
+        condition === "Partly Cloudy" ||
+        condition === "Light Rain" ||
+        condition === "Snow" ||
+        condition === "Cloudy" ||
+        condition === "Wind"
     ) {
         background = backgrounds.bright;
     }
 
-    // Grey conditions
     else if (
-        weather.current.condition === "Fog" ||
-        weather.current.condition === "Heavy Snow" ||
-        weather.current.condition === "Blowing Snow" ||
-        weather.current.condition === "Hail"
+        condition === "Fog" ||
+        condition === "Heavy Snow" ||
+        condition === "Blowing Snow" ||
+        condition === "Hail"
     ) {
         background = backgrounds.grey;
     }
 
-    // Dull conditions
     else if (
-        weather.current.condition === "Rain" ||
-        weather.current.condition === "Heavy Rain" ||
-        weather.current.condition === "Lightning"
+        condition === "Rain" ||
+        condition === "Heavy Rain" ||
+        condition === "Lightning"
     ) {
         background = backgrounds.dull;
     }
 
+    // Determine wave
+    if (isNight) {
+
+        if (
+            condition === "Rain" ||
+            condition === "Heavy Rain" ||
+            condition === "Lightning" ||
+            condition === "Fog" ||
+            condition === "Heavy Snow" ||
+            condition === "Blowing Snow" ||
+            condition === "Hail"
+        ) {
+            wave = waves.nightChoppy;
+        } else {
+            wave = waves.nightCalm;
+        }
+
+    } else {
+
+        if (
+            condition === "Rain" ||
+            condition === "Heavy Rain" ||
+            condition === "Lightning"
+        ) {
+            wave = waves.dayChoppy;
+        }
+
+        else if (
+            condition === "Heavy Snow" ||
+            condition === "Blowing Snow" ||
+            condition === "Hail"
+        ) {
+            wave = waves.dullChoppy;
+        }
+
+        else if (
+            condition === "Fog"
+        ) {
+            wave = waves.dullCalm;
+        }
+
+        else {
+            wave = waves.dayCalm;
+        }
+    }
+
     document.getElementById("foldedCardBackground").src =
         `../Assets/components/weatherTideCard/backgrounds/${background}`;
+
+    document.getElementById("foldedWave").src =
+        `../Assets/components/weatherTideCard/waves/${wave}`;
 }
 
 function updateCardTextColour(weather) {
 
-    if (weather.current.is_day === 0 || weather.current.condition === "Clear" || weather.current.condition === "Partly Clear") {
+    if (weather.current.is_day === 0) {
         document.getElementById("weatherText").classList.add("night");
         document.getElementById("tideText").classList.add("night");
     } else {

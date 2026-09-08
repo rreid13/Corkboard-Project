@@ -56,7 +56,8 @@
 }
 
 #foldedCardFront {
-    z-index: 3;
+    z-index: 4;
+    pointer-events: none;
 }
 
 #foldedWeatherIcon {
@@ -244,11 +245,11 @@
 #dailyWeather {
     position: absolute;
 
-    left: 12%;
+    left: 15%;
     top: 72%;
-    transform: translateY(calc(40.5 / 100 * min(100vw, 160vh)));
+    transform: translateY(calc(39.5 / 100 * min(100vw, 160vh)));
 
-    width: 70%;
+    width: 80%;
 
     display: flex;
     flex-direction: column;
@@ -287,9 +288,9 @@
 }
 
 .dailyIcon {
-    width: 8%;
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 10%;
+    margin-left: 4%;
+    margin-right: 4%;
 }
 
 .dailyTemperature {
@@ -300,4 +301,18 @@
 #weatherText.night,
 #tideText.night {
     color: rgb(229, 229, 229);
+}
+
+#foldedWave {
+    position: absolute;
+    left: 65%;
+    top: 24%;
+    width: 28%;
+    z-index: 3;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#foldedWave:hover {
+   filter: drop-shadow(1.5px 0 0 white) drop-shadow(-1.5px 0 0 white) drop-shadow(0 1.5px 0 white) drop-shadow(0 -1.5px 0 white);
 }

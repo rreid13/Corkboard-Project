@@ -93,6 +93,7 @@ async function getTides() {
 
 
     displayTides(nextHigh, nextLow, todaysTides);
+    drawTideCurve();
 }
 
 

@@ -1,0 +1,11 @@
+#tideCurveContainer {
+    position: absolute;
+
+    left: 3vw;
+    top: 39vw;
+
+    width: 24.3vw;
+    height: 17vw;
+
+    z-index: 9999;
+}

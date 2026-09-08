@@ -1,11 +1,11 @@
 #tideCurveContainer {
     position: absolute;
 
-    left: 3vw;
-    top: 39vw;
+    left: calc(3 / 100 * min(100vw, 160vh));
+    top: calc(39 / 100 * min(100vw, 160vh));
 
-    width: 24.3vw;
-    height: 17vw;
+    width: calc(24.3 / 100 * min(100vw, 160vh));
+    height: calc(17 / 100 * min(100vw, 160vh));
 
-    z-index: 9999;
+    z-index: 3;
 }

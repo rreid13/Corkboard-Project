@@ -181,8 +181,8 @@ function drawTideCurve() {
     const graphLeft = 20;
     const graphRight = 380;
 
-    const graphTop = 30;
-    const graphBottom = 155;
+    const graphTop = 15;
+    const graphBottom = 170;
 
 
     /*
@@ -786,13 +786,13 @@ function drawTideCurve() {
 
     currentLine.setAttribute(
         "y1",
-        "20"
+        "0"
     );
 
 
     currentLine.setAttribute(
         "y2",
-        graphBottom
+        "180"
     );
 
 
@@ -874,7 +874,7 @@ function drawTideCurve() {
 
     timeLabel.setAttribute(
         "y",
-        "12"
+        "4"
     );
 
 

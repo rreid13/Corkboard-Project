@@ -4,7 +4,10 @@
     "tuesday": null,
     "wednesday": null,
     "thursday": null,
-    "friday": null,
+    "friday": {
+        "start": 17,
+        "end": 17
+    },
     "saturday": {
         "start": 7,
         "end": 13

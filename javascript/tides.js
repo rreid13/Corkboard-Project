@@ -35,7 +35,8 @@ async function getTides() {
 
             extremes.push({
                 type: type === "HIGH" ? "High" : "Low",
-                dt: Math.floor(new Date(time).getTime() / 1000)
+                dt: Math.floor(new Date(time).getTime() / 1000),
+                height: Number(row[3])
             });
 
         });
